@@ -82,7 +82,7 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-frontend:main
 
             # Restart only production services (pass DB_PASSWORD for postgres initialization)
-            DB_PASSWORD=${{ secrets.DB_PASSWORD }} DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} IMAGE_TAG=main docker-compose -f docker-compose.yml up -d db eagle-eye-advisory-api eagle-eye-advisory-frontend nginx
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }} DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} IMAGE_TAG=main docker-compose -f docker-compose.yml up -d db prod_api prod_frontend nginx
 
             # Show logs
-            docker-compose -f docker-compose.yml logs --tail=50 eagle-eye-advisory-api eagle-eye-advisory-frontend nginx
+            docker-compose -f docker-compose.yml logs --tail=50 prod_api prod_frontend nginx
