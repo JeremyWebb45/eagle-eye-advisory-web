@@ -55,7 +55,7 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-frontend:${{ env.IMAGE_TAG }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-frontend:main
 
       - name: Build and push API image
         uses: docker/build-push-action@v5
@@ -63,7 +63,7 @@ jobs:
           context: ./api
           file: ./api/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-api:${{ env.IMAGE_TAG }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-api:main
 
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
@@ -78,11 +78,11 @@ jobs:
             git pull origin main
 
             # Pull pre-built production images (env vars baked in at build time)
-            docker pull ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-api:${{ env.IMAGE_TAG }}
-            docker pull ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-frontend:${{ env.IMAGE_TAG }}
+            docker pull ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-api:main
+            docker pull ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-frontend:main
 
             # Restart only production services (pass DB_PASSWORD for postgres initialization)
-            DB_PASSWORD=${{ secrets.DB_PASSWORD }} DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} IMAGE_TAG=${{ env.IMAGE_TAG }} docker-compose -f docker-compose.yml up -d db eagle-eye-advisory-api eagle-eye-advisory-frontend nginx
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }} DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} IMAGE_TAG=main docker-compose -f docker-compose.yml up -d db eagle-eye-advisory-api eagle-eye-advisory-frontend nginx
 
             # Show logs
             docker-compose -f docker-compose.yml logs --tail=50 eagle-eye-advisory-api eagle-eye-advisory-frontend nginx
