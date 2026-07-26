@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:15
+    env_file:
+      - ../.env.services
+    restart: unless-stopped
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "5432:5432"
+
+volumes:
+  db_data:

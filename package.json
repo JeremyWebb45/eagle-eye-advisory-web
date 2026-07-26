@@ -1,0 +1,22 @@
+{
+  "name": "g-and-j-wedding",
+  "version": "1.0.0",
+  "description": "G and J Wedding - Monorepo",
+  "private": true,
+  "scripts": {
+    "db:compose": "docker-compose -f db/docker-compose.yml up",
+    "api:install": "cd api && venv\\Scripts\\python -m pip install -r requirements.txt",
+    "api:setup": "cd api && python -m venv venv && pnpm run api:install",
+    "api:dev": "cd api && venv\\Scripts\\python -m flask run --host 127.0.0.1 --port 5001",
+    "ui:install": "cd frontend && pnpm install",
+    "ui:dev": "cd frontend && pnpm run dev"
+  },
+  "keywords": [
+    "wedding",
+    "react",
+    "flask",
+    "postgresql"
+  ],
+  "author": "",
+  "license": "MIT"
+}

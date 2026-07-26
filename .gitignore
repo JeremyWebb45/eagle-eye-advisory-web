@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+venv/
+env/
+.env
+.env.services
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+pip-log.txt
+
+# Frontend
+frontend/dist
+frontend/node_modules
+
+# API
+api/__pycache__
+api/venv
+
+# DB migrations
+db/migrations
+db/data.sql
