@@ -13,8 +13,8 @@ app = Flask(__name__)
 allowed_origins = [
     "http://localhost:5173",  # Vite dev server
     "http://localhost:3000",  # Frontend container in dev
-    "https://g-and-j-wedding.com",  # Production
-    "https://www.g-and-j-wedding.com"  # Production www
+    "https://eagleeyeadvisory.us.com",  # Production
+    "https://www.eagleeyeadvisory.us.com"  # Production www
 ]
 CORS(app, origins=allowed_origins) 
 

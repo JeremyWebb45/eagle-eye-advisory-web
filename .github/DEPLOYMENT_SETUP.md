@@ -103,8 +103,8 @@ This approach:
    ```bash
    cat >> ~/.ssh/config << 'EOF'
    Host github.com
-    IdentityFile ~/.ssh/github
-    User git
+   IdentityFile ~/.ssh/github
+   User git
    EOF
    chmod 600 ~/.ssh/config
    ```
@@ -121,8 +121,8 @@ This approach:
 
    ```bash
    cd ~
-   git clone git@github.com:YOUR_USERNAME/g-and-j-wedding.git
-   cd g-and-j-wedding
+   git clone git@github.com:JeremyWebb45/eagle-eye-advisory-web.git
+   cd eagle-eye-advisory-web
    ```
 
 3. **Disable any pre-installed system Nginx** (VPS providers often include it):
@@ -163,7 +163,7 @@ This approach:
    sudo apt-get install -y certbot python3-certbot-nginx
 
    # For production
-   sudo certbot certonly --standalone -d g-and-j-wedding.com -d www.g-and-j-wedding.com
+   sudo certbot certonly --standalone -d eagleeyeadvisory.us.com -d www.eagleeyeadvisory.us.com
 
    # For development
    sudo certbot certonly --standalone -d development.g-and-j-wedding.com

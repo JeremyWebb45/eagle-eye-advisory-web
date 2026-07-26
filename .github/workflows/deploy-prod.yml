@@ -55,7 +55,7 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/g-and-j-wedding-frontend:${{ env.IMAGE_TAG }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-frontend:${{ env.IMAGE_TAG }}
 
       - name: Build and push API image
         uses: docker/build-push-action@v5
@@ -63,7 +63,7 @@ jobs:
           context: ./api
           file: ./api/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/g-and-j-wedding-api:${{ env.IMAGE_TAG }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-api:${{ env.IMAGE_TAG }}
 
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
@@ -74,15 +74,15 @@ jobs:
           script: |
             set -e
             # repository root on the VPS for this monorepo
-            cd ~/g-and-j-wedding || exit 1
+            cd ~/eagle-eye-advisory-web || exit 1
             git pull origin main
 
             # Pull pre-built production images (env vars baked in at build time)
-            docker pull ${{ secrets.DOCKER_USERNAME }}/g-and-j-wedding-api:${{ env.IMAGE_TAG }}
-            docker pull ${{ secrets.DOCKER_USERNAME }}/g-and-j-wedding-frontend:${{ env.IMAGE_TAG }}
+            docker pull ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-api:${{ env.IMAGE_TAG }}
+            docker pull ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-frontend:${{ env.IMAGE_TAG }}
 
             # Restart only production services (pass DB_PASSWORD for postgres initialization)
-            DB_PASSWORD=${{ secrets.DB_PASSWORD }} DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} IMAGE_TAG=${{ env.IMAGE_TAG }} docker-compose -f docker-compose.yml up -d db prod_api prod_frontend nginx
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }} DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} IMAGE_TAG=${{ env.IMAGE_TAG }} docker-compose -f docker-compose.yml up -d db eagle-eye-advisory-api eagle-eye-advisory-frontend nginx
 
             # Show logs
-            docker-compose -f docker-compose.yml logs --tail=50 prod_api prod_frontend nginx
+            docker-compose -f docker-compose.yml logs --tail=50 eagle-eye-advisory-api eagle-eye-advisory-frontend nginx

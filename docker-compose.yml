@@ -25,7 +25,7 @@ services:
 
   # Production API service
   prod_api:
-    image: ${DOCKER_USERNAME}/g-and-j-wedding-api:${IMAGE_TAG:-main}
+    image: ${DOCKER_USERNAME}/eagle-eye-advisory-api:${IMAGE_TAG:-main}
     container_name: wedding_api_prod
     restart: unless-stopped
     depends_on:
@@ -46,7 +46,7 @@ services:
 
   # Production Frontend service
   prod_frontend:
-    image: ${DOCKER_USERNAME}/g-and-j-wedding-frontend:${IMAGE_TAG:-main}
+    image: ${DOCKER_USERNAME}/eagle-eye-advisory-frontend:${IMAGE_TAG:-main}
     container_name: wedding_frontend_prod
     restart: unless-stopped
     depends_on:

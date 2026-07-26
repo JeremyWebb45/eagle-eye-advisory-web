@@ -1,7 +1,7 @@
 {
-  "name": "g-and-j-wedding",
+  "name": "eagle-eye-advisory-web",
   "version": "1.0.0",
-  "description": "G and J Wedding - Monorepo",
+  "description": "Eagle Eye Advisory - Monorepo",
   "private": true,
   "scripts": {
     "db:compose": "docker-compose -f db/docker-compose.yml up",
