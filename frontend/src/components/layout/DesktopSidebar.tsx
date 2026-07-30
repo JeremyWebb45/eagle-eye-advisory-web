@@ -15,23 +15,25 @@ import { Link } from 'react-router-dom';
 
 export default function DesktopSidebar() {
   return (
-    <Sidebar className="bg-(--primary-green)">
-      <SidebarHeader className="flex flex-row items-center bg-(--primary-green)">
-        <Link to="/">
-          <img src="/logo.svg" alt="Logo" width={32} height={32} />
+    <Sidebar>
+      <SidebarHeader className="flex flex-row items-center">
+        <Link to="/" className="flex gap-2 items-center">
+          <img src="/logo.png" alt="Logo" width={64} />
+          <div className="flex flex-col italic text-[10px]">
+            <p>Independent insight.</p>
+            <p>Operational clarity.</p>
+            <p>Strategic execution.</p>
+          </div>
         </Link>
-        <p className="text-lg italic font-semibold">Wedding</p>
       </SidebarHeader>
-      <Separator className="bg-(--primary-dark-green)" />
-      <SidebarContent className="bg-(--primary-green)">
+      <Separator />
+      <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-(--primary-tan)">
-            PAGES
-          </SidebarGroupLabel>
+          <SidebarGroupLabel>PAGES</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="flex flex-col">
               {getNavItems().map((item) => (
-                <SidebarMenuItem key={item.to} className="text-(--primary-tan)">
+                <SidebarMenuItem key={item.to}>
                   <SidebarMenuButton asChild>
                     <Link to={item.to}>
                       {item.icon}

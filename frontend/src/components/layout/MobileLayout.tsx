@@ -45,10 +45,15 @@ export default function MobileLayout({
               ))}
             </div>
           </DrawerContent>
-          <Card className="rounded-none bg-(--primary-green) shadow-md text-(--primary-tan)">
+          <Card className="rounded-none shadow-md">
             <CardHeader className="flex justify-between items-center">
-              <Link to="/">
-                <img src="/logo.svg" alt="Logo" width={32} height={32} />
+              <Link to="/" className="flex gap-2 items-center">
+                <img src="/logo.png" alt="Logo" width={64} />
+                <div className="flex flex-col italic text-[10px]">
+                  <p>Independent insight.</p>
+                  <p>Operational clarity.</p>
+                  <p>Strategic execution.</p>
+                </div>
               </Link>
               <DrawerTrigger>
                 <Menu className="" />

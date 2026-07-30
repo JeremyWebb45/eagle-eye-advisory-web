@@ -145,5 +145,5 @@
 }
 
 .wedding-card {
-  @apply bg-(--primary-green) border border-(--primary-dark-green) shadow-md text-(--primary-tan) w-full;
+  @apply shadow-md w-full;
 }
