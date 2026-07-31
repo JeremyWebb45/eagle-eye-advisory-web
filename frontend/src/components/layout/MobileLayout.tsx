@@ -24,7 +24,7 @@ export default function MobileLayout({
         className={`sticky z-10 top-0 ${!isShy ? 'translate-y-[-110%]' : 'translate-y-0'} transition-transform`}
       >
         <Drawer direction="top">
-          <DrawerContent className="bg-(--primary-blue) text-(--primary-yellow)">
+          <DrawerContent className="bg-(--primary-blue) text-(--primary-yellow) border-b border-(--primary-dark-blue)">
             <DrawerHeader className="flex justify-between items-center flex-row">
               <DrawerTitle className="font-bold text-(--primary-tan)">
                 PAGES
