@@ -24,6 +24,9 @@ export default function RootLayout() {
         </DesktopLayout>
       )}
       <Toaster />
+      <div className="fixed w-full h-full justify-center items-center flex opacity-15 -z-10">
+        <img src="/Logo_w_name.png" alt="Logo" className="w-60 lg:w-80" />
+      </div>
     </>
   );
 }
