@@ -44,17 +44,18 @@ export default function MobileLayout({
                 </Link>
               ))}
             </div>
-            <div className="flex justify-between items-center w-fit">
-              <div className="p-4">
+            <div className="flex justify-between items-center p-4">
+              <div className="flex w-fit flex-col">
                 <p className="font-semibold w-fit">
                   Eagle Eye Advisory Services LLC
                 </p>
-                <p className="italic max-w-4/6 w-fit text-xs">
-                  Independent insight. Operational clarity. Strategic execution.
+                <p className="italic text-xs">
+                  Independent insight. Operational clarity.
                 </p>
+                <p className="italic text-xs">Strategic execution.</p>
               </div>
-              <div className="mr-4 flex items-center justify-center h-20 w-20 bg-white rounded-full">
-                <img src="/logo.png" alt="Logo" className="w-10 h-auto" />
+              <div className="flex items-center justify-center h-16 w-16 bg-white rounded-full border-2 border-(--primary-yellow)">
+                <img src="/logo.png" alt="Logo" className="w-12 h-auto" />
               </div>
             </div>
           </DrawerContent>
@@ -62,11 +63,11 @@ export default function MobileLayout({
             <CardHeader className="flex justify-between items-center">
               <Link
                 to="/"
-                className="bg-white h-8 w-8 rounded-full flex items-center justify-center"
+                className="bg-white h-8 w-8 rounded-full border-(--primary-yellow) border-2 flex items-center justify-center"
               >
                 <img src="/logo.png" alt="Logo" className="w-6 h-auto" />
               </Link>
-              <p className="text-lg italic semi-bold text-(--primary-yellow)">
+              <p className="text-lg italic font-bold text-(--primary-yellow)">
                 Eagle Eye Advisory
               </p>
               <DrawerTrigger>
