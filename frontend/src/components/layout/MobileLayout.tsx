@@ -24,7 +24,7 @@ export default function MobileLayout({
         className={`sticky z-10 top-0 ${!isShy ? 'translate-y-[-110%]' : 'translate-y-0'} transition-transform`}
       >
         <Drawer direction="top">
-          <DrawerContent className="bg-(--primary-green) text-(--primary-tan)">
+          <DrawerContent className="bg-(--primary-blue) text-(--primary-yellow)">
             <DrawerHeader className="flex justify-between items-center flex-row">
               <DrawerTitle className="font-bold text-(--primary-tan)">
                 PAGES
@@ -33,7 +33,7 @@ export default function MobileLayout({
                 <X />
               </DrawerTrigger>
             </DrawerHeader>
-            <Separator className="bg-(--primary-dark-green)" />
+            <Separator className="bg-(--primary-dark-blue)" />
             <div className="flex flex-col gap-4 p-4">
               {getNavItems().map((item) => (
                 <Link key={item.to} to={item.to}>
@@ -44,19 +44,33 @@ export default function MobileLayout({
                 </Link>
               ))}
             </div>
+            <div className="flex justify-between items-center w-fit">
+              <div className="p-4">
+                <p className="font-semibold w-fit">
+                  Eagle Eye Advisory Services LLC
+                </p>
+                <p className="italic max-w-4/6 w-fit text-xs">
+                  Independent insight. Operational clarity. Strategic execution.
+                </p>
+              </div>
+              <div className="mr-4 flex items-center justify-center h-20 w-20 bg-white rounded-full">
+                <img src="/logo.png" alt="Logo" className="w-10 h-auto" />
+              </div>
+            </div>
           </DrawerContent>
-          <Card className="rounded-none shadow-md">
+          <Card className="rounded-none shadow-md bg-(--primary-blue) border-b border-(--primary-dark-blue)">
             <CardHeader className="flex justify-between items-center">
-              <Link to="/" className="flex gap-2 items-center">
-                <img src="/logo.png" alt="Logo" width={64} />
-                <div className="flex flex-col italic text-[10px]">
-                  <p>Independent insight.</p>
-                  <p>Operational clarity.</p>
-                  <p>Strategic execution.</p>
-                </div>
+              <Link
+                to="/"
+                className="bg-white h-8 w-8 rounded-full flex items-center justify-center"
+              >
+                <img src="/logo.png" alt="Logo" className="w-6 h-auto" />
               </Link>
+              <p className="text-lg italic semi-bold text-(--primary-yellow)">
+                Eagle Eye Advisory
+              </p>
               <DrawerTrigger>
-                <Menu className="" />
+                <Menu className="text-(--primary-yellow)" />
               </DrawerTrigger>
             </CardHeader>
           </Card>

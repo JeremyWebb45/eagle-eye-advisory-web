@@ -1,4 +1,4 @@
-import { CalendarCheck, Gift, Home, Info, MapPin } from 'lucide-react';
+import { Home, ShieldCheck } from 'lucide-react';
 
 export const NAV_ITEMS = [
   {
@@ -7,24 +7,9 @@ export const NAV_ITEMS = [
     to: '/',
   },
   {
-    icon: <CalendarCheck />,
-    label: 'RSVP',
-    to: '/rsvp',
-  },
-  {
-    icon: <Info />,
-    label: 'Wedding Details',
-    to: '/details',
-  },
-  {
-    icon: <MapPin />,
-    label: 'Travel & Stay',
-    to: '/travel',
-  },
-  {
-    icon: <Gift />,
-    label: 'Registry',
-    to: '/registry',
+    icon: <ShieldCheck />,
+    label: 'Admin',
+    to: '/admin',
   },
 ];
 

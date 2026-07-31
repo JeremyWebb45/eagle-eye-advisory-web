@@ -1,15 +1,9 @@
--- Initialize invites table
--- `invites` follows the TypeScript types in src/data/invites.ts
-
--- Create invites table with guests stored as JSONB
-CREATE TABLE IF NOT EXISTS invites (
-  id TEXT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS leads (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  preferred_name TEXT NOT NULL DEFAULT '',
   email TEXT NOT NULL DEFAULT '',
-  guests JSONB NOT NULL DEFAULT '[]'::jsonb
-);
-
-CREATE TABLE IF NOT EXISTS summaries (
-  id TEXT PRIMARY KEY,
-  title TEXT NOT NULL,
-  counts JSONB NOT NULL DEFAULT '[]'::jsonb
+  company TEXT,
+  title TEXT,
+  phone TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

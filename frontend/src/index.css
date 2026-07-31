@@ -81,14 +81,9 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --primary-green: #7f8061;
-  --primary-dark-green: #2a3427;
-  --primary-tan: #fff5dc;
-  --primary-red: rgb(250, 117, 165);
-  --primary-blue: rgb(140, 169, 204);
-  --primary-yellow: #eddd46;
-  --primary-orange: #e69e5a;
-  --primary-purple: rgb(216, 207, 231);
+  --primary-blue: #08325d;
+  --primary-dark-blue: #041834;
+  --primary-yellow: #f7c834;
 }
 
 .dark {
