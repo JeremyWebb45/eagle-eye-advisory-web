@@ -77,11 +77,9 @@ jobs:
             cd ~/eagle-eye-advisory-web || exit 1
             git pull origin main
 
-            # Install apache2-utils for htpasswd if not already installed
-            which htpasswd || sudo apt-get update && sudo apt-get install -y apache2-utils
-
             # Generate .htpasswd file from secret credentials
-            htpasswd -nb admin "${{ secrets.BASIC_AUTH_PASSWORD }}" > .htpasswd
+            # Format: username:password (generate bcrypt hash with htpasswd)
+            docker run --rm httpd:2.4-alpine htpasswd -nb admin "${{ secrets.BASIC_AUTH_PASSWORD }}" > .htpasswd
 
             # Pull pre-built production images (env vars baked in at build time)
             docker pull ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-api:main
