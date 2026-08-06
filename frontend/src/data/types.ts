@@ -1,25 +1,21 @@
-export type Guest = {
-  name: string;
-  mealSelection?: 'meat' | 'fish' | 'both' | 'veggies';
-  dietaryRestrictions?: string;
-  songRequests?: string;
-  coming?: boolean;
-};
-
-export type Invite = {
-  id: string;
-  guests: Guest[];
+export type ContactUsFormData = {
+  preferredName: string;
   email: string;
-};
-
-type Count = {
-  id: string;
-  label: string;
-  count: number;
-};
-
-export type Summary = {
-  id: string;
+  phone: string;
+  company: string;
+  message: string;
   title: string;
-  counts: Count[];
 };
+
+export interface FormFieldConfig {
+  name: 'preferredName' | 'email' | 'phone' | 'company' | 'message' | 'title';
+  label: string;
+  isRequired?: boolean;
+  component?: 'input' | 'textarea';
+  validator?: (value: string) => void;
+}
+
+export interface Template {
+  title: string;
+  link?: string;
+}

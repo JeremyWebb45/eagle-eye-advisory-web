@@ -6,6 +6,7 @@ import RootLayout from './components/layout/RootLayout';
 import Home from './pages/Home';
 import ErrorComponent from './components/layout/ErrorComponent';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Partners from './pages/Partners';
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        element: <Partners />,
+        path: '/partners',
       },
     ],
   },

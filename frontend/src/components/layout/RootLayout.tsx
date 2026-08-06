@@ -12,16 +12,20 @@ export default function RootLayout() {
     return <LoadingComponent />;
   }
 
+  const content = (
+    <div className="flex w-full flex-col flex-1 relative max-w-5xl">
+      <div className="p-4 flex flex-col gap-4 text-(--primary-dark-blue)">
+        <Outlet />
+      </div>
+    </div>
+  );
+
   return (
     <>
       {isMobile ? (
-        <MobileLayout>
-          <Outlet />
-        </MobileLayout>
+        <MobileLayout>{content}</MobileLayout>
       ) : (
-        <DesktopLayout>
-          <Outlet />
-        </DesktopLayout>
+        <DesktopLayout>{content}</DesktopLayout>
       )}
       <Toaster />
       <div className="fixed w-full h-full justify-center items-center flex opacity-15 -z-10">

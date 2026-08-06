@@ -38,7 +38,10 @@ export default function DesktopSidebar() {
               {getNavItems().map((item) => (
                 <SidebarMenuItem key={item.to}>
                   <SidebarMenuButton asChild>
-                    <Link to={item.to}>
+                    <Link
+                      to={item.to}
+                      className="hover:bg-(--primary-dark-blue)! hover:text-(--primary-yellow)!"
+                    >
                       {item.icon}
                       <span className="font-bold">{item.label}</span>
                     </Link>
