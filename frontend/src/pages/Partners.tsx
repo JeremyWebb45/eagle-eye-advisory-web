@@ -1,6 +1,6 @@
 import SectionTitle from '@/components/SectionTitle';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CircleDollarSign, Factory, Handshake, Plus } from 'lucide-react';
+import { CircleDollarSign, Handshake, Plus } from 'lucide-react';
 
 export default function Partners() {
   return (

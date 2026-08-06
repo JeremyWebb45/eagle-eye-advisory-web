@@ -1,5 +1,5 @@
 import type { FormFieldConfig, Template } from '@/data/types';
-import { Handshake, Home, ShieldCheck } from 'lucide-react';
+import { Handshake, Home } from 'lucide-react';
 import {
   handleEmailChange,
   handleMessageChange,
