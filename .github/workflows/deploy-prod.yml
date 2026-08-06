@@ -77,6 +77,10 @@ jobs:
             cd ~/eagle-eye-advisory-web || exit 1
             git pull origin main
 
+            # Generate .htpasswd file from secret credentials
+            # Format: username:password (generate bcrypt hash with htpasswd)
+            docker run --rm httpd:2.4-alpine htpasswd -nb admin "${{ secrets.BASIC_AUTH_PASSWORD }}" > .htpasswd
+
             # Pull pre-built production images (env vars baked in at build time)
             docker pull ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-api:main
             docker pull ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-frontend:main

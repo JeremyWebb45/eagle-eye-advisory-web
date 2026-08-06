@@ -6,6 +6,7 @@ venv/
 env/
 .env
 .env.services
+.env.frontend
 
 # Build outputs
 dist/
