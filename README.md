@@ -11,46 +11,103 @@ Full-stack monorepo for G & J Wedding website.
 └── package.json       # Workspace root
 ```
 
-## Frontend Setup
+## Setup
 
-The frontend is a React SPA bundled with Vite and uses React Router for navigation.
+This monorepo uses **pnpm workspaces** and **Turbo** for task orchestration and build caching.
 
-### Development
-
-```bash
-npm run frontend:dev
-```
-
-### Build
+### Installation
 
 ```bash
-npm run frontend:build
+# Install all workspace dependencies
+pnpm install
+
+# Install Turbo globally (optional, recommended)
+pnpm add -g turbo
 ```
 
-## API Setup
+## Development
 
-The API is built with Flask. Port your existing Flask application into the `api/` directory.
+### Run all services in parallel
 
-## Database Setup
+```bash
+# Frontend, API, and DB services all start together
+pnpm dev
+```
 
-The database uses PostgreSQL. Port your existing database configuration into the `db/` directory.
+### Run individual services
 
-## Getting Started
+```bash
+# Frontend only (React SPA with Vite + React Router)
+pnpm dev:frontend
 
-1. Install root dependencies (if using npm workspaces):
-   ```bash
-   npm install
-   ```
+# API only (Flask application)
+pnpm dev:api
 
-2. Navigate to the frontend and install dependencies:
-   ```bash
-   cd frontend && npm install
-   ```
+# Database only (PostgreSQL)
+pnpm dev:db
+```
 
-3. Start the development server:
-   ```bash
-   npm run frontend:dev
-   ```
+## Building
 
-4. Port in your existing Flask API into the `api/` directory
-5. Port in your existing PostgreSQL configuration into the `db/` directory
+### Build all packages
+
+```bash
+# Turbo handles dependency ordering and caching
+pnpm build
+```
+
+### Build frontend only
+
+```bash
+pnpm build:frontend
+```
+
+## Linting
+
+```bash
+# Lint all packages with caching
+pnpm lint
+
+# Lint frontend only
+pnpm lint:frontend
+```
+
+## Workspace Scripts
+
+The following scripts are available at the root level and utilize pnpm workspace filtering:
+
+- `pnpm dev` — Run all services (uses Turbo for parallel execution)
+- `pnpm build` — Build all packages with dependency ordering
+- `pnpm lint` — Lint all packages
+- `pnpm dev:frontend` — Develop frontend only
+- `pnpm dev:api` — Develop API only
+- `pnpm dev:db` — Start database container
+- `pnpm build:frontend` — Build frontend only
+- `pnpm lint:frontend` — Lint frontend only
+
+## Monorepo Structure
+
+```
+├── frontend/          # React SPA with Vite + React Router
+│   └── package.json
+├── api/               # Flask API
+│   └── package.json
+├── db/                # PostgreSQL database
+│   └── package.json
+├── pnpm-workspace.yaml    # pnpm workspace configuration
+├── turbo.json             # Turbo build orchestration
+└── package.json           # Root workspace package
+```
+
+## Adding Dependencies
+
+```bash
+# Add to frontend
+pnpm --filter frontend add <package>
+
+# Add to API (Python via pip, not pnpm)
+pnpm --filter api exec pip install <package>
+
+# Add dev dependency to root
+pnpm add -D <package>
+```

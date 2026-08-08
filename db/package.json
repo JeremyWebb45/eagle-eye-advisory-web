@@ -1,0 +1,12 @@
+{
+  "name": "db",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Database service configuration",
+  "scripts": {
+    "dev": "docker-compose up || echo 'Docker Desktop is not running. Please start Docker Desktop to run the database service.'",
+    "compose": "docker-compose up",
+    "compose:down": "docker-compose down",
+    "compose:logs": "docker-compose logs -f"
+  }
+}

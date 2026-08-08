@@ -1,4 +1,5 @@
 import useIsMobile from '@/hooks/useIsMobile';
+import { useRouteHead } from '@/hooks/useRouteHead';
 import MobileLayout from './MobileLayout';
 import { Outlet } from 'react-router-dom';
 import DesktopLayout from './DesktopLayout';
@@ -7,6 +8,7 @@ import { Toaster } from '../ui/sonner';
 
 export default function RootLayout() {
   const { isLoading, isMobile } = useIsMobile();
+  useRouteHead();
 
   if (isLoading) {
     return <LoadingComponent />;
