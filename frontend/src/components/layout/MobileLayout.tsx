@@ -7,10 +7,11 @@ import {
 } from '@/components/ui/drawer';
 import { Card, CardHeader } from '@/components/ui/card';
 import { Menu, X } from 'lucide-react';
-import { getNavItems } from '@/lib/consts';
 import useShyNav from '@/hooks/useShyNav';
 import { Separator } from '../ui/separator';
 import { Link } from 'react-router-dom';
+import { getNavItems } from '@/lib/utils';
+import { useUserContext } from '@/providers/UserProvider';
 
 export default function MobileLayout({
   children,
@@ -18,6 +19,7 @@ export default function MobileLayout({
   children: React.ReactNode;
 }) {
   const isShy = useShyNav();
+  const { user } = useUserContext();
   return (
     <>
       <div
@@ -35,7 +37,7 @@ export default function MobileLayout({
             </DrawerHeader>
             <Separator className="bg-(--primary-dark-blue)" />
             <div className="flex flex-col gap-4 p-4">
-              {getNavItems().map((item) => (
+              {getNavItems(user).map((item) => (
                 <Link key={item.to} to={item.to}>
                   <DrawerTrigger className="flex items-center gap-2 w-full ">
                     {item.icon}

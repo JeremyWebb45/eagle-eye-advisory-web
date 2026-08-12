@@ -1,33 +1,60 @@
-import type { FormFieldConfig, Template } from '@/data/types';
-import { Handshake, Home } from 'lucide-react';
-import {
-  handleEmailChange,
-  handleMessageChange,
-  handleNameChange,
-} from './utils';
+import type {
+  ContactFormFieldConfig,
+  LoginFormFieldConfig,
+  NavItem,
+  Template,
+} from '@/data/types';
+import { Contact, Handshake, Home, LogIn, ShieldLock } from 'lucide-react';
 
-export const NAV_ITEMS = [
+export const handleEmailChange = (email: string) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (email.trim() === '') {
+    return 'Please enter an email to receive confirmation';
+  }
+  if (!emailRegex.test(email)) {
+    return 'Must be a valid email';
+  }
+};
+
+export const handleNameChange = (name: string) => {
+  if (name.trim() === '') {
+    return 'Please enter your name';
+  }
+};
+
+export const handleMessageChange = (message: string) => {
+  if (message.trim() === '') {
+    return 'Please enter a message';
+  }
+};
+
+export const NAV_ITEMS: NavItem[] = [
   {
     icon: <Home />,
     label: 'Home',
-    to: '/',
+    to: '/internal',
   },
   {
     icon: <Handshake />,
     label: 'Partners',
-    to: '/partners',
+    to: '/internal/partners',
+  },
+  {
+    icon: <LogIn />,
+    label: 'Log In',
+    to: '/log-in',
+  },
+  {
+    icon: <Contact />,
+    label: 'Contact Us',
+    to: '/',
+  },
+  {
+    icon: <ShieldLock />,
+    label: 'Admin',
+    to: '/internal/admin',
   },
 ];
-
-export const getNavItems = () => {
-  const inviteId = localStorage.getItem('invite');
-  return NAV_ITEMS.map((item) => {
-    if (inviteId && item.to === '/rsvp') {
-      return { ...item, to: `${item.to}/view`, label: 'View RSVP' };
-    }
-    return item;
-  });
-};
 
 export const EXEC_SUITE_TEMPLATES: Template[] = [
   { title: 'Business Case  and Financial Justification', link: undefined },
@@ -65,22 +92,39 @@ export const M_SUITE_TEMPLATES: Template[] = [
   { title: 'Customized Operations – Value Added Services', link: undefined },
 ];
 
-export const FORM_FIELDS: FormFieldConfig[] = [
-  {
-    name: 'preferredName',
-    label: 'Name',
-    isRequired: true,
-    validator: handleNameChange,
-  },
-  { name: 'company', label: 'Company' },
-  { name: 'title', label: 'Title' },
+export const LOGIN_FORM_FIELDS: LoginFormFieldConfig[] = [
   {
     name: 'email',
+    type: 'email',
     label: 'Email',
     isRequired: true,
     validator: handleEmailChange,
   },
-  { name: 'phone', label: 'Phone' },
+  {
+    name: 'password',
+    type: 'password',
+    label: 'Password',
+    isRequired: true,
+  },
+];
+
+export const CONTACT_FORM_FIELDS: ContactFormFieldConfig[] = [
+  {
+    name: 'name',
+    label: 'Name',
+    isRequired: true,
+    validator: handleNameChange,
+  },
+  { name: 'company', label: 'Company', type: 'text' },
+  { name: 'title', label: 'Title', type: 'text' },
+  {
+    name: 'email',
+    label: 'Email',
+    type: 'email',
+    isRequired: true,
+    validator: handleEmailChange,
+  },
+  { name: 'phone', label: 'Phone', type: 'text' },
   {
     name: 'message',
     label: 'Message',
@@ -89,3 +133,8 @@ export const FORM_FIELDS: FormFieldConfig[] = [
     validator: handleMessageChange,
   },
 ];
+
+export const INPUT_CLASS =
+  'bg-primary-foreground border-2 border-(--primary-dark-blue) pl-2 py-2 rounded-md text-(--primary-dark-blue)';
+export const LABEL_CLASS = 'text-(--primary-yellow)';
+export const FIELD_CONTAINER_CLASS = 'flex flex-col gap-2';

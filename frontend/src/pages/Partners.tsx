@@ -2,6 +2,10 @@ import SectionTitle from '@/components/SectionTitle';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CircleDollarSign, Handshake, Plus } from 'lucide-react';
 
+import Bear from 'assets/bear.png';
+import Bull from 'assets/bull.png';
+import JBLLogo from 'assets/JBL_logo.png';
+
 export default function Partners() {
   return (
     <>
@@ -25,9 +29,9 @@ export default function Partners() {
         <CardContent className="flex flex-col gap-4 lg:flex-row lg:gap-0 w-full relative justify-center items-center">
           <div className="flex lg:w-1/2 flex-col items-center justify-center gap-4">
             <span className="flex gap-4 relative items-center justify-center">
-              <img src="bear.png" className="w-50 z-10" />
+              <img src={Bear} className="w-50 z-10" />
               <CircleDollarSign size={84} className="absolute" />
-              <img src="bull.png" className="w-50 rotate-y-180 z-10" />
+              <img src={Bull} className="w-50 rotate-y-180 z-10" />
             </span>
             <span className="flex text-center flex-col w-full items-center italic">
               <p className="text-xl font-bold">SKOPOS Advisory LLC</p>
@@ -36,7 +40,7 @@ export default function Partners() {
           </div>
           <Plus className="text-white z-20" size={120} />
           <div className="flex lg:w-1/2 flex-col items-center justify-center gap-4">
-            <img src="JBL logo.png" className="w-50" />
+            <img src={JBLLogo} className="w-50" />
             <span className="flex flex-col w-full items-center italic">
               <p className="text-xl font-bold">JBo Labs LLC</p>
               <p>Custom software & agentic UX integrations</p>

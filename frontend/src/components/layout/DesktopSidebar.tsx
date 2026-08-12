@@ -1,6 +1,7 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -9,11 +10,13 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '../ui/sidebar';
-import { getNavItems } from '@/lib/consts';
 import { Separator } from '../ui/separator';
 import { Link } from 'react-router-dom';
+import { getNavItems } from '@/lib/utils';
+import { useUserContext } from '@/providers/UserProvider';
 
 export default function DesktopSidebar() {
+  const { user } = useUserContext();
   return (
     <Sidebar className="bg-(--primary-blue) text-(--primary-yellow)">
       <SidebarHeader className="flex flex-col items-center p-4 bg-(--primary-blue)">
@@ -23,19 +26,19 @@ export default function DesktopSidebar() {
           </span>
           <p className="font-bold italic">Eagle Eye Advisory</p>
         </Link>
-        <div className="flex flex-col italic text-[10px] w-full">
+        <div className="flex flex-col italic text-[10px] w-full text-primary-foreground">
           <p>Independent insight. Operational clarity. Strategic execution.</p>
         </div>
       </SidebarHeader>
       <Separator className="bg-(--primary-dark-blue)" />
       <SidebarContent className="bg-(--primary-blue)">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-(--primary-yellow)">
+          <SidebarGroupLabel className="text-primary-foreground">
             PAGES
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="flex flex-col">
-              {getNavItems().map((item) => (
+              {getNavItems(user).map((item) => (
                 <SidebarMenuItem key={item.to}>
                   <SidebarMenuButton asChild>
                     <Link
@@ -52,6 +55,7 @@ export default function DesktopSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter></SidebarFooter>
     </Sidebar>
   );
 }

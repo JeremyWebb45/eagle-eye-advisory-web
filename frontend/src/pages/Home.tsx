@@ -1,4 +1,3 @@
-import ContactUs from '@/components/ContactUs';
 import AboutSection from '@/components/home/AboutSection';
 import SectionTitle from '@/components/SectionTitle';
 import TemplateLibrary from '@/components/home/TemplateLibrary';
@@ -31,9 +30,6 @@ export default function Home() {
 
       <SectionTitle>Template Library</SectionTitle>
       <TemplateLibrary />
-
-      <SectionTitle>Contact Us</SectionTitle>
-      <ContactUs />
     </>
   );
 }
