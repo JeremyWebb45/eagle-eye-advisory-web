@@ -4,12 +4,12 @@ import useGetMe from '@/data/useGetMe';
 import { LoaderCircle } from 'lucide-react';
 
 type UserContextType = {
-  user: User | undefined;
+  user: User | null;
   error: Error | null;
 };
 
 const UserContext = createContext<UserContextType>({
-  user: undefined,
+  user: null,
   error: null,
 });
 
@@ -30,7 +30,7 @@ export default function UserProvider({
     );
   }
   return (
-    <UserContext.Provider value={{ user, error }}>
+    <UserContext.Provider value={{ user: user ?? null, error }}>
       {children}
     </UserContext.Provider>
   );

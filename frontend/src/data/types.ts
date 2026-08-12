@@ -37,7 +37,19 @@ export type NewLead = {
   message: string;
 };
 
+export type Lead = {
+  id: string;
+  name: string;
+  email: string;
+  title?: string;
+  phone?: string;
+  company?: string;
+  message: string;
+  created_at: string;
+};
+
 export type User = {
+  id?: string;
   email: string;
   name: string;
   company?: string;
@@ -45,6 +57,25 @@ export type User = {
   phone?: string;
   status: string;
   isAdmin: boolean;
+  created_at?: string;
+  updated_at?: string;
+};
+
+export type CreateUserInput = {
+  email?: string;
+  preferred_name: string;
+  password: string;
+  company?: string;
+  title?: string;
+  phone?: string;
+};
+
+export type UpdateUserInput = {
+  preferred_name?: string;
+  company?: string;
+  title?: string;
+  phone?: string;
+  status?: string;
 };
 
 export type NavItem = {

@@ -1,5 +1,8 @@
+import { getEnvVars } from '@/lib/utils';
 import { ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
+const API_URL = getEnvVars().apiUrl;
 
 export default function WhoSection() {
   return (
@@ -10,7 +13,7 @@ export default function WhoSection() {
           LLC
         </p>
         <Link
-          to="/Executive Summary CV AUG 4 2026.pdf"
+          to={`${API_URL}/files/Executive Summary CV AUG 4 2026.pdf`}
           target="_blank"
           className="flex my-2 items-center gap-2 text-sm font-semibold border border-(--primary-dark-blue) rounded-lg p-2 bg-(--primary-blue) text-(--primary-yellow) hover:bg-(--primary-dark-blue) transition-colors"
         >

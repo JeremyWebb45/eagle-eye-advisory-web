@@ -73,7 +73,7 @@ def logout():
     """Logout endpoint - clears cookies."""
     response = Response(status=200)
     response.delete_cookie('access_token_cookie')
-    response.delete_cookie('refresh_token_cookie')
+    response.delete_cookie('refresh_token_cookie', path='/auth/refresh')
     return response
 
 @auth_bp.route('/me', methods=['GET'])

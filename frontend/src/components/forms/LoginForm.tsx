@@ -4,7 +4,7 @@ import {
   INPUT_CLASS,
   LABEL_CLASS,
   LOGIN_FORM_FIELDS,
-} from '@/lib/consts';
+} from '@/lib/utils';
 import { useForm } from '@tanstack/react-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -96,9 +96,8 @@ export default function LoginForm() {
         <form.Subscribe
           selector={(state) => ({
             emailErrors: state.fieldMeta.email?.errors,
-            isPristine: state.isPristine,
           })}
-          children={({ emailErrors, isPristine }) => {
+          children={({ emailErrors }) => {
             const emailError = getFirstError(emailErrors);
             return (
               <>
@@ -110,7 +109,6 @@ export default function LoginForm() {
                 )}
                 <div className="flex gap-4 w-full justify-between">
                   <Button
-                    disabled={isPristine}
                     type="submit"
                     className="flex-1 bg-(--primary-yellow) hover:bg-yellow-500 cursor-pointer rounded-md font-bold"
                   >

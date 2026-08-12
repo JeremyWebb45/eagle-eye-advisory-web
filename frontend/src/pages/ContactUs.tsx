@@ -1,7 +1,12 @@
 import ContactUsForm from '@/components/forms/ContactUsForm';
-import { Link } from 'react-router-dom';
+import { useUserContext } from '@/providers/UserProvider';
+import { Link, Navigate } from 'react-router-dom';
 
 export default function ContactUs() {
+  const { user } = useUserContext();
+  if (user) {
+    return <Navigate to="/internal" replace />;
+  }
   return (
     <>
       <ContactUsForm />

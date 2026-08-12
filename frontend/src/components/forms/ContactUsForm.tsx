@@ -5,7 +5,7 @@ import {
   CONTACT_FORM_FIELDS,
   INPUT_CLASS,
   LABEL_CLASS,
-} from '@/lib/consts';
+} from '@/lib/utils';
 import useCreateLead from '@/data/useCreateLead';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';

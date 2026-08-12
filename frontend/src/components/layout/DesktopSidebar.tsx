@@ -14,9 +14,13 @@ import { Separator } from '../ui/separator';
 import { Link } from 'react-router-dom';
 import { getNavItems } from '@/lib/utils';
 import { useUserContext } from '@/providers/UserProvider';
+import { LogOut, User } from 'lucide-react';
+import useLogOut from '@/data/useLogOut';
 
 export default function DesktopSidebar() {
   const { user } = useUserContext();
+  const logOut = useLogOut();
+
   return (
     <Sidebar className="bg-(--primary-blue) text-(--primary-yellow)">
       <SidebarHeader className="flex flex-col items-center p-4 bg-(--primary-blue)">
@@ -55,7 +59,20 @@ export default function DesktopSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter></SidebarFooter>
+      {user && (
+        <SidebarFooter className="bg-(--primary-blue) border-t border-(--primary-dark-blue) p-4">
+          <p className="flex gap-2 items-center">
+            <User />
+            {user.name}
+          </p>
+          <p
+            className="italic text-sm underline cursor-pointer w-fit gap-2 text-primary-foreground flex items-center"
+            onClick={logOut}
+          >
+            Log Out <LogOut size={16} />
+          </p>
+        </SidebarFooter>
+      )}
     </Sidebar>
   );
 }

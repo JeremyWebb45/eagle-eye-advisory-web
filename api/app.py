@@ -40,6 +40,12 @@ app.register_blueprint(auth_bp)
 from routes.leads import leads_bp
 app.register_blueprint(leads_bp)
 
+from routes.users import users_bp
+app.register_blueprint(users_bp)
+
+from routes.files import files_bp
+app.register_blueprint(files_bp)
+
 if __name__ == '__main__':
     # default host=0.0.0.0 so containers can reach it
     app.run(host='0.0.0.0', port=5001, debug=True)

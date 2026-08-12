@@ -6,12 +6,14 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 import { Card, CardHeader } from '@/components/ui/card';
-import { Menu, X } from 'lucide-react';
+import { LogOut, Menu, X } from 'lucide-react';
 import useShyNav from '@/hooks/useShyNav';
 import { Separator } from '../ui/separator';
 import { Link } from 'react-router-dom';
 import { getNavItems } from '@/lib/utils';
 import { useUserContext } from '@/providers/UserProvider';
+import { Button } from '../ui/button';
+import useLogOut from '@/data/useLogOut';
 
 export default function MobileLayout({
   children,
@@ -20,15 +22,16 @@ export default function MobileLayout({
 }) {
   const isShy = useShyNav();
   const { user } = useUserContext();
+  const logOut = useLogOut();
   return (
     <>
       <div
         className={`sticky z-10 top-0 ${!isShy ? 'translate-y-[-110%]' : 'translate-y-0'} transition-transform`}
       >
         <Drawer direction="top">
-          <DrawerContent className="bg-(--primary-blue) text-(--primary-yellow) border-b border-(--primary-dark-blue)">
-            <DrawerHeader className="flex justify-between items-center flex-row">
-              <DrawerTitle className="font-bold text-(--primary-tan)">
+          <DrawerContent className="bg-(--primary-blue) border-b border-(--primary-dark-blue)">
+            <DrawerHeader className="flex justify-between text-primary-foreground items-center flex-row">
+              <DrawerTitle className="font-bold text-primary-foreground">
                 PAGES
               </DrawerTitle>
               <DrawerTrigger>
@@ -36,7 +39,7 @@ export default function MobileLayout({
               </DrawerTrigger>
             </DrawerHeader>
             <Separator className="bg-(--primary-dark-blue)" />
-            <div className="flex flex-col gap-4 p-4">
+            <div className="flex flex-col gap-4 p-4 text-(--primary-yellow)">
               {getNavItems(user).map((item) => (
                 <Link key={item.to} to={item.to}>
                   <DrawerTrigger className="flex items-center gap-2 w-full ">
@@ -48,18 +51,31 @@ export default function MobileLayout({
             </div>
             <div className="flex justify-between items-center p-4">
               <div className="flex w-fit flex-col">
-                <p className="font-semibold w-fit">
+                <p className="font-semibold w-fit text-(--primary-yellow)">
                   Eagle Eye Advisory Services LLC
                 </p>
-                <p className="italic text-xs">
+                <p className="italic text-xs text-primary-foreground">
                   Independent insight. Operational clarity.
                 </p>
-                <p className="italic text-xs">Strategic execution.</p>
+                <p className="italic text-xs text-primary-foreground">
+                  Strategic execution.
+                </p>
               </div>
               <div className="flex items-center justify-center h-16 w-16 bg-white rounded-full border-2 border-(--primary-yellow)">
                 <img src="/logo.png" alt="Logo" className="w-12 h-auto" />
               </div>
             </div>
+            {user && (
+              <div className="flex w-full justify-end px-4 pb-4">
+                <Button
+                  variant="ghost"
+                  className="text-primary-foreground"
+                  onClick={logOut}
+                >
+                  Log Out <LogOut />
+                </Button>
+              </div>
+            )}
           </DrawerContent>
           <Card className="rounded-none shadow-md bg-(--primary-blue) border-b border-(--primary-dark-blue)">
             <CardHeader className="flex justify-between items-center">
