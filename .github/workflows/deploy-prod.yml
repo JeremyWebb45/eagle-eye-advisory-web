@@ -33,11 +33,13 @@ jobs:
         run: |
           # Write DB connection env vars from secrets (baked into API image)
           cat > .env.services << 'EOF'
+          TIER=production
           POSTGRES_HOST=db
           POSTGRES_PORT=5432
           POSTGRES_USER=postgres
           POSTGRES_PASSWORD=${{ secrets.DB_PASSWORD }}
           POSTGRES_DB=g_and_j_wedding
+          JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }}
           EOF
           # Copy into api directory so it's included in the build context
           cp .env.services api/
@@ -77,16 +79,30 @@ jobs:
             cd ~/eagle-eye-advisory-web || exit 1
             git pull origin main
 
-            # Generate .htpasswd file from secret credentials
-            # Format: username:password (generate bcrypt hash with htpasswd)
-            docker run --rm httpd:2.4-alpine htpasswd -nb admin "${{ secrets.BASIC_AUTH_PASSWORD }}" > .htpasswd
-
             # Pull pre-built production images (env vars baked in at build time)
             docker pull ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-api:main
             docker pull ${{ secrets.DOCKER_USERNAME }}/eagle-eye-advisory-frontend:main
 
-            # Restart only production services (pass DB_PASSWORD for postgres initialization)
+            # Start services
             DB_PASSWORD=${{ secrets.DB_PASSWORD }} DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} IMAGE_TAG=main docker-compose -f docker-compose.yml up -d db prod_api prod_frontend nginx
+
+            # Wait for database to be ready for connections
+            echo "Waiting for database to be ready..."
+            max_attempts=30
+            attempt=0
+            until docker-compose exec -T db pg_isready -U postgres > /dev/null 2>&1; do
+              attempt=$((attempt + 1))
+              if [ $attempt -ge $max_attempts ]; then
+                echo "Database failed to become ready after $max_attempts attempts"
+                exit 1
+              fi
+              echo "Attempt $attempt/$max_attempts: Database not ready yet, retrying in 2 seconds..."
+              sleep 2
+            done
+            echo "Database is ready!"
+
+            # Run database migrations
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }} DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} IMAGE_TAG=main docker-compose -f docker-compose.yml run --rm prod_api sh -c 'cd /app && alembic upgrade head'
 
             # Show logs
             docker-compose -f docker-compose.yml logs --tail=50 prod_api prod_frontend nginx

@@ -8,9 +8,10 @@
     "dev": "turbo run dev",
     "build": "turbo run build",
     "lint": "turbo run lint",
+    "api:install": "pnpm --filter api run install",
     "dev:frontend": "pnpm --filter frontend run dev",
     "dev:api": "pnpm --filter api run dev",
-    "dev:db": "pnpm --filter db run compose",
+    "dev:db": "pnpm --filter db run dev",
     "build:frontend": "pnpm --filter frontend run build",
     "lint:frontend": "pnpm --filter frontend run lint"
   },

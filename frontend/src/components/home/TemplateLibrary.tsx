@@ -9,7 +9,7 @@ import {
   EXEC_SUITE_TEMPLATES,
   M_SUITE_TEMPLATES,
   SYS_INT_TEMPLATES,
-} from '@/lib/consts';
+} from '@/lib/utils';
 import TemplateGrid from './TemplateGrid';
 
 const TEMPLATE_SUITES = [

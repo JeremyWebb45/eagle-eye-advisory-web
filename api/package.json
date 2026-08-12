@@ -6,6 +6,10 @@
   "scripts": {
     "setup": "python -m venv venv && venv\\Scripts\\python -m pip install -r requirements.txt",
     "dev": "venv\\Scripts\\python -m flask run --host 127.0.0.1 --port 5001",
-    "install": "venv\\Scripts\\python -m pip install -r requirements.txt"
+    "install": "venv\\Scripts\\python -m pip install -r requirements.txt",
+    "db:new": "venv\\Scripts\\alembic revision --autogenerate -m",
+    "db:init": "venv\\Scripts\\alembic upgrade head",
+    "db:status": "venv\\Scripts\\alembic current",
+    "db:reset": "venv\\Scripts\\alembic downgrade base && venv\\Scripts\\alembic upgrade head"
   }
 }
