@@ -33,16 +33,6 @@ services:
         condition: service_healthy
     networks:
       - wedding_network
-    healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          'python -c ''import urllib.request; urllib.request.urlopen("http://localhost:5000/invites")'' || exit 1',
-        ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
 
   # Production Frontend service
   prod_frontend:
