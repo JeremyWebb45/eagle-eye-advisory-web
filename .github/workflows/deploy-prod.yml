@@ -102,7 +102,7 @@ jobs:
             echo "Database is ready!"
 
             # Run database migrations
-            DB_PASSWORD=${{ secrets.DB_PASSWORD }} DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} IMAGE_TAG=main docker-compose -f docker-compose.yml run --rm prod_api sh -c 'cd /app && alembic upgrade head'
+            docker-compose -f docker-compose.yml exec -T prod_api sh -c 'cd /app && alembic upgrade head'
 
             # Show logs
             docker-compose -f docker-compose.yml logs --tail=50 prod_api prod_frontend nginx
