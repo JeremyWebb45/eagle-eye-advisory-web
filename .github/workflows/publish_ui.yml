@@ -1,4 +1,4 @@
-name: Publish UI to Docker Hub
+name: Publish UI to Prod
 
 on:
   push:
@@ -55,7 +55,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           source: "ui/docker-compose.yml"
-          target: "~/eagle_eye_advisory/ui/"
+          target: "~/eagle_eye_advisory/ui/docker-compose.yml"
 
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
