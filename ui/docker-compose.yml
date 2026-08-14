@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   prod_frontend:
     image: jwebb429/eagle-eye-advisory-ui:main
@@ -16,3 +14,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+
+networks:
+  eagle_eye_network:
+    external: true
