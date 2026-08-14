@@ -17,4 +17,4 @@ services:
 
 networks:
   eagle_eye_network:
-    external: true
+    driver: bridge
