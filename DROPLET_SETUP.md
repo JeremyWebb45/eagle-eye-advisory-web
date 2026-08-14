@@ -78,3 +78,7 @@
    **Note:** If you already have certificates, you don't need to run certbot again. Certbot can also auto-renew certificates (they last 90 days).
 
    ```
+
+5. Create docker network
+
+   docker network create eagle_eye_network --driver bridge
