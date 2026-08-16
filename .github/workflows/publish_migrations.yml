@@ -39,4 +39,4 @@ jobs:
           JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
           TIER: production
         run: |
-          alembic upgrade head
+          uv run alembic upgrade head
