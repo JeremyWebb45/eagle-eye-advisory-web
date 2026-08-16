@@ -32,8 +32,3 @@ class Settings(BaseSettings):
         case_sensitive = True
 
 settings = Settings()
-
-# Debug: Print database URL for troubleshooting
-print(f"[DEBUG] DATABASE_URL: {settings.DATABASE_URL}")
-print(f"[DEBUG] POSTGRES_HOST: {settings.POSTGRES_HOST}")
-print(f"[DEBUG] POSTGRES_PORT: {settings.POSTGRES_PORT}")
