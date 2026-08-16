@@ -1,6 +1,6 @@
 services:
   api:
-    image: eagle-eye-advisory-api:main
+    image: jwebb429/eagle-eye-advisory-api:main
     container_name: eagle_eye_api
     restart: unless-stopped
     environment:

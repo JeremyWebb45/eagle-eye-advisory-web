@@ -2,7 +2,6 @@
 name = "api"
 version = "0.1.0"
 description = "FastAPI backend for Eagle Eye Advisory"
-readme = "README.md"
 authors = [
     { name = "Jeremy", email = "jeremy.webb429@gmail.com" }
 ]
@@ -20,3 +19,6 @@ dependencies = [
     "sqlalchemy>=2.0.52",
     "uvicorn[standard]>=0.52.3",
 ]
+
+[tool.setuptools]
+packages = ["app"]
