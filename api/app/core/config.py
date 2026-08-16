@@ -32,3 +32,8 @@ class Settings(BaseSettings):
         case_sensitive = True
 
 settings = Settings()
+
+print(f"\n{'='*60}")
+print(f"DATABASE_URL: {settings.DATABASE_URL}")
+print(f"For DBeaver: postgresql://{settings.POSTGRES_HOST}:{settings.POSTGRES_PORT}/{settings.POSTGRES_DB}")
+print(f"{'='*60}\n")
