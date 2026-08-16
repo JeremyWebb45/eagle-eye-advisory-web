@@ -37,7 +37,7 @@ jobs:
 
       - name: Build Vite app
         run: |
-          echo "VITE_API_URL=api" > ui/.env
+          echo "VITE_API_URL=api/" > ui/.env
           cd ui && pnpm run build
 
       - name: Build and push ui image
