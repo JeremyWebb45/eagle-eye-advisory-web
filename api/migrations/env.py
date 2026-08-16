@@ -4,6 +4,7 @@ import sys
 from pathlib import Path
 from logging.config import fileConfig
 from dotenv import load_dotenv
+from urllib.parse import quote
 
 from sqlalchemy import engine_from_config, pool, MetaData
 from alembic import context
@@ -23,11 +24,13 @@ postgres_host = os.getenv("POSTGRES_HOST", "localhost")
 postgres_port = os.getenv("POSTGRES_PORT", "5432")
 postgres_db = os.getenv("POSTGRES_DB", "eagle_eye_db")
 
-# Build the database URL
+# Build the database URL with proper URL encoding
+user = quote(postgres_user, safe='')
+password = quote(postgres_password, safe='')
 sqlalchemy_url = (
     f"postgresql+psycopg://"
-    f"{postgres_user}:"
-    f"{postgres_password}@"
+    f"{user}:"
+    f"{password}@"
     f"{postgres_host}:"
     f"{postgres_port}/"
     f"{postgres_db}"
