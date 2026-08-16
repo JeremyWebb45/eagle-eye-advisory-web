@@ -1,30 +1,36 @@
 """Alembic environment configuration for database migrations."""
+import os
 import sys
 from pathlib import Path
 from logging.config import fileConfig
+from dotenv import load_dotenv
 
 from sqlalchemy import engine_from_config, pool, MetaData
 from alembic import context
 
-# Add parent directory to path so we can import utils
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from utils.get_env_values import get_env_values
+# Load .env if it exists
+dotenv_path = Path(__file__).parent.parent / ".env"
+if dotenv_path.exists():
+    load_dotenv(dotenv_path)
 
 # Get the Alembic config object
 config = context.config
 
 # Get environment variables for database connection
-env_values = get_env_values()
+postgres_user = os.getenv("POSTGRES_USER", "postgres")
+postgres_password = os.getenv("POSTGRES_PASSWORD", "password")
+postgres_host = os.getenv("POSTGRES_HOST", "localhost")
+postgres_port = os.getenv("POSTGRES_PORT", "5432")
+postgres_db = os.getenv("POSTGRES_DB", "eagle_eye_db")
 
 # Build the database URL
 sqlalchemy_url = (
     f"postgresql+psycopg://"
-    f"{env_values['POSTGRES_USER']}:"
-    f"{env_values['POSTGRES_PASSWORD']}@"
-    f"{env_values['POSTGRES_HOST']}:"
-    f"{env_values['POSTGRES_PORT']}/"
-    f"{env_values['POSTGRES_DB']}"
+    f"{postgres_user}:"
+    f"{postgres_password}@"
+    f"{postgres_host}:"
+    f"{postgres_port}/"
+    f"{postgres_db}"
 )
 
 config.set_main_option("sqlalchemy.url", sqlalchemy_url)

@@ -1,20 +1,18 @@
 from pydantic_settings import BaseSettings
 
-from utils.get_env_values import get_env_values
-
 
 class Settings(BaseSettings):
     """Application settings from environment variables."""
     
     # Database
-    POSTGRES_USER: str
-    POSTGRES_PASSWORD: str
-    POSTGRES_HOST: str
-    POSTGRES_PORT: str
-    POSTGRES_DB: str
+    POSTGRES_USER: str = "postgres"
+    POSTGRES_PASSWORD: str = "password"
+    POSTGRES_HOST: str = "localhost"
+    POSTGRES_PORT: str = "5432"
+    POSTGRES_DB: str = "eagle_eye_db"
     
     # JWT
-    JWT_SECRET_KEY: str
+    JWT_SECRET_KEY: str = "dev-key-not-for-production"
     JWT_ACCESS_TOKEN_EXPIRES: int = 3600  # 1 hour
     JWT_REFRESH_TOKEN_EXPIRES: int = 604800  # 7 days
     
@@ -30,14 +28,4 @@ class Settings(BaseSettings):
         env_file = ".env"
         case_sensitive = True
 
-env_values = get_env_values()
-
-settings = Settings(
-    POSTGRES_USER=env_values["POSTGRES_USER"],
-    POSTGRES_PASSWORD=env_values["POSTGRES_PASSWORD"],
-    POSTGRES_HOST=env_values["POSTGRES_HOST"],
-    POSTGRES_PORT=env_values["POSTGRES_PORT"],
-    POSTGRES_DB=env_values["POSTGRES_DB"],
-    JWT_SECRET_KEY=env_values["JWT_SECRET_KEY"],
-    TIER=env_values["TIER"]
-)
+settings = Settings()
