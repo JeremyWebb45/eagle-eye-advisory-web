@@ -5,7 +5,7 @@ on:
     branches:
       - pipeline-refactor
     paths-ignore:
-      - "api/migrations/versions/**"
+      - "api/migrations/**"
       - ".github/workflows/**"
       - "ui/**"
       - "nginx/**"

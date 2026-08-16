@@ -6,7 +6,7 @@ from logging.config import fileConfig
 from dotenv import load_dotenv
 from urllib.parse import quote
 
-from sqlalchemy import engine_from_config, pool, MetaData
+from sqlalchemy import pool, MetaData, create_engine
 from alembic import context
 
 # Load .env if it exists
@@ -36,8 +36,6 @@ sqlalchemy_url = (
     f"{postgres_db}"
 )
 
-config.set_main_option("sqlalchemy.url", sqlalchemy_url)
-
 # Setup logging configuration
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
@@ -52,9 +50,8 @@ def run_migrations_offline() -> None:
     
     This configures the context with just a URL and not an Engine.
     """
-    url = config.get_main_option("sqlalchemy.url")
     context.configure(
-        url=url,
+        url=sqlalchemy_url,
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
@@ -69,11 +66,9 @@ def run_migrations_online() -> None:
     
     This scenario creates an Engine and associates a connection with the context.
     """
-    connectable = engine_from_config(
-        config.get_section(config.config_ini_section, {}),
-        prefix="sqlalchemy.",
-        poolclass=pool.NullPool,
-    )
+    # Create engine directly from URL to avoid ConfigParser interpolation issues
+
+    connectable = create_engine(sqlalchemy_url, poolclass=pool.NullPool)
 
     with connectable.connect() as connection:
         context.configure(
