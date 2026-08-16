@@ -1,22 +1,21 @@
-"""add inital admins
+"""add initial admins
 
-Revision ID: 002bd6555bbe
-Revises: af5cb4607347
-Create Date: 2026-08-09 19:54:45.073854
+Revision ID: 299a545b0e41
+Revises: 
+Create Date: 2026-08-15 22:36:40.643017
 
 """
 from typing import Sequence, Union
+import os
 from uuid import uuid4
 import bcrypt
-import os
-
 from alembic import op
 import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '002bd6555bbe'
-down_revision: Union[str, Sequence[str], None] = 'af5cb4607347'
+revision: str = '299a545b0e41'
+down_revision: Union[str, Sequence[str], None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
