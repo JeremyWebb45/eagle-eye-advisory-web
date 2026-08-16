@@ -3,7 +3,7 @@ name: Run Database Migrations
 on:
   push:
     branches:
-      - pipeline-refactor
+      - main
     paths:
       - "api/migrations/**"
   workflow_dispatch:

@@ -3,7 +3,7 @@ name: Publish Nginx to Prod
 on:
   push:
     branches:
-      - pipeline-refactor
+      - main
     paths:
       - "nginx/**"
   workflow_dispatch:

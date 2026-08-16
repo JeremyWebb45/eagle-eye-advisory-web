@@ -3,7 +3,7 @@ name: Publish UI to Prod
 on:
   push:
     branches:
-      - pipeline-refactor
+      - main
     paths:
       - "ui/**"
   workflow_dispatch:
