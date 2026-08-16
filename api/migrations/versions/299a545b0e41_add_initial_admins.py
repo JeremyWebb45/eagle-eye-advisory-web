@@ -11,6 +11,7 @@ from uuid import uuid4
 import bcrypt
 from alembic import op
 import sqlalchemy as sa
+from sqlalchemy import text
 
 
 # revision identifiers, used by Alembic.
@@ -30,31 +31,61 @@ def upgrade() -> None:
     jeremy_id = str(uuid4())
     
     # Insert users with parameterized query
-    op.execute(
-        'INSERT INTO "user" (id, email, password_hash, preferred_name, company, title, phone, status, created_at, updated_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, NOW(), NOW())',
-        [
-            (barry_id, 'barry@eagleeyeadvisory.us.com', password_hash, 'Barry Webb', 'Eagle Eye Advisory', 'Admin', '7708614415', 'active'),
-            (jeremy_id, 'jeremy@eagleeyeadvisory.us.com', password_hash, 'Jeremy Webb', 'Eagle Eye Advisory', 'Admin', '7708614415', 'active'),
-        ]
-    )
+    users_data = [
+        {
+            'id': barry_id,
+            'email': 'barry@eagleeyeadvisory.us.com',
+            'password_hash': password_hash,
+            'preferred_name': 'Barry Webb',
+            'company': 'Eagle Eye Advisory',
+            'title': 'Admin',
+            'phone': '7708614415',
+            'status': 'active'
+        },
+        {
+            'id': jeremy_id,
+            'email': 'jeremy@eagleeyeadvisory.us.com',
+            'password_hash': password_hash,
+            'preferred_name': 'Jeremy Webb',
+            'company': 'Eagle Eye Advisory',
+            'title': 'Admin',
+            'phone': '7708614415',
+            'status': 'active'
+        },
+    ]
+    
+    for user in users_data:
+        op.execute(
+            text(f'''INSERT INTO "user" (id, email, password_hash, preferred_name, company, title, phone, status, created_at, updated_at) 
+                     VALUES ('{user["id"]}', '{user["email"]}', '{user["password_hash"]}', '{user["preferred_name"]}', '{user["company"]}', '{user["title"]}', '{user["phone"]}', '{user["status"]}', NOW(), NOW())''')
+        )
     
     # Insert admins with parameterized query
-    op.execute(
-        'INSERT INTO "admin" (id, user_id, permissions, created_at, updated_at) VALUES (%s, %s, %s, NOW(), NOW())',
-        [
-            (str(uuid4()), barry_id, 'full_access'),
-            (str(uuid4()), jeremy_id, 'full_access'),
-        ]
-    )
+    admins_data = [
+        {
+            'id': str(uuid4()),
+            'user_id': barry_id,
+            'permissions': 'full_access'
+        },
+        {
+            'id': str(uuid4()),
+            'user_id': jeremy_id,
+            'permissions': 'full_access'
+        },
+    ]
+    
+    for admin in admins_data:
+        op.execute(
+            text(f'''INSERT INTO "admin" (id, user_id, permissions, created_at, updated_at) 
+                     VALUES ('{admin["id"]}', '{admin["user_id"]}', '{admin["permissions"]}', NOW(), NOW())''')
+        )
 
 
 def downgrade() -> None:
     """Downgrade schema - remove initial admins."""
     op.execute(
-        "DELETE FROM admin WHERE user_id IN (SELECT id FROM \"user\" WHERE email = %s OR email = %s)",
-        ('barry@eagleeyeadvisory.us.com', 'jeremy@eagleeyeadvisory.us.com')
+        text(f"DELETE FROM admin WHERE user_id IN (SELECT id FROM \"user\" WHERE email = 'barry@eagleeyeadvisory.us.com' OR email = 'jeremy@eagleeyeadvisory.us.com')")
     )
     op.execute(
-        "DELETE FROM \"user\" WHERE email = %s OR email = %s",
-        ('barry@eagleeyeadvisory.us.com', 'jeremy@eagleeyeadvisory.us.com')
+        text(f"DELETE FROM \"user\" WHERE email = 'barry@eagleeyeadvisory.us.com' OR email = 'jeremy@eagleeyeadvisory.us.com'")
     )
