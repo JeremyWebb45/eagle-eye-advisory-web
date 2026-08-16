@@ -6,6 +6,8 @@ on:
       - pipeline-refactor
     paths:
       - "api/**"
+    paths-ignore:
+      - "api/migrations/**"
   workflow_dispatch:
 
 jobs:
