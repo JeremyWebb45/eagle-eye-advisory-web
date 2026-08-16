@@ -5,7 +5,7 @@ on:
     branches:
       - pipeline-refactor
     paths:
-      - "api/migrations/versions/**"
+      - "api/migrations/**"
   workflow_dispatch:
 
 jobs:
