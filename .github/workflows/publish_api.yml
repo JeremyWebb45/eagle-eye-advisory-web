@@ -24,27 +24,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.11"
-
-      - name: Install uv
-        run: pip install uv
-
-      - name: Create venv and install dependencies
-        working-directory: ./api
-        run: |
-          python -m venv venv
-          ./venv/bin/pip install --upgrade pip
-          ./venv/bin/pip install -e .
-
-      - name: Copy site-packages to build context
-        working-directory: ./api
-        run: |
-          cp -r venv/lib/python3.11/site-packages .
-          rm -rf venv
-
       - name: Build and push API image
         uses: docker/build-push-action@v5
         with:
