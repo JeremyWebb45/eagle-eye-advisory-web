@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 import os
+from urllib.parse import unquote
 
 from app.core.database import get_db
 from app.dependencies.auth import get_current_user_id
@@ -27,6 +28,9 @@ def get_file(
     db: Session = Depends(get_db)
 ):
     """Get a protected file - authenticated users only."""
+    # Decode URL-encoded filename
+    filename = unquote(filename)
+    
     # Verify file is in whitelist to prevent directory traversal attacks
     if filename not in ALLOWED_FILES:
         raise HTTPException(

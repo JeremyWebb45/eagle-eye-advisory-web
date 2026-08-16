@@ -8,7 +8,7 @@ export default function useGetUsers() {
   return useQuery({
     queryKey: ['users'],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/users/`, {
+      const response = await fetch(`${API_URL}/users`, {
         credentials: 'include',
       });
       if (!response.ok) {

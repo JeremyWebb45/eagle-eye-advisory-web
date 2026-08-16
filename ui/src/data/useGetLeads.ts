@@ -8,7 +8,7 @@ export default function useGetLeads() {
   return useQuery({
     queryKey: ['leads'],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/leads/`, {
+      const response = await fetch(`${API_URL}/leads`, {
         credentials: 'include',
       });
       if (!response.ok) {
