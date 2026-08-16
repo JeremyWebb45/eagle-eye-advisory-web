@@ -1,0 +1,21 @@
+services:
+  api:
+    container_name: eagle_eye_api
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_HOST: ${POSTGRES_HOST:-postgres}
+      POSTGRES_PORT: ${POSTGRES_PORT:-5432}
+      POSTGRES_DB: ${POSTGRES_DB:-eagle_eye_db}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-your_jwt_secret_key}
+      TIER: ${TIER:-development}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./protected_files:/app/protected_files
+    networks:
+      - eagle_eye_network

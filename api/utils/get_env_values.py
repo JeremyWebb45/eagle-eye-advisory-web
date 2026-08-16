@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 current_dir = Path(__file__).resolve().parent.parent
 
-env_services = current_dir / '.env.services'
+env_services = current_dir / '.env'
 
 if env_services.exists():
     load_dotenv(env_services)
