@@ -1,5 +1,6 @@
 services:
   prod_frontend:
+    image: eagle-eye-advisory-ui:main
     container_name: eagle_eye_ui
     restart: unless-stopped
     networks:
