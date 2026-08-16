@@ -5,7 +5,7 @@ on:
     branches:
       - pipeline-refactor
     paths:
-      - 'nginx/**'
+      - "nginx/**"
   workflow_dispatch:
 
 jobs:
@@ -31,3 +31,4 @@ jobs:
           script: |
             cd ~/eagle_eye_advisory/nginx
             docker-compose up -d
+            docker-compose exec -T nginx nginx -s reload
