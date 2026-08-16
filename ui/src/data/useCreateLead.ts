@@ -8,7 +8,7 @@ const API_URL = getEnvVars().apiUrl;
 export default function useCreateLead() {
   const createLeadMutation = useMutation({
     mutationFn: async (newLead: NewLead) => {
-      const response = await fetch(`${API_URL}/leads/`, {
+      const response = await fetch(`${API_URL}/leads`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
