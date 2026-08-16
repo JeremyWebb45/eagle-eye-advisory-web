@@ -1,0 +1,42 @@
+name: Run Database Migrations
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "api/migrations/**"
+  workflow_dispatch:
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        run: pip install uv
+
+      - name: Install dependencies
+        working-directory: ./api
+        run: |
+          uv sync
+
+      - name: Run migrations
+        working-directory: ./api
+        env:
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_HOST: eagleeyeadvisory.us.com
+          POSTGRES_PORT: 5433
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
+          TIER: production
+        run: |
+          uv run alembic upgrade head

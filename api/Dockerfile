@@ -1,17 +1,19 @@
+FROM python:3.11-slim AS builder
+
+WORKDIR /app
+COPY . .
+RUN pip install --upgrade pip && pip install -e .
+
 FROM python:3.11-slim
 
 WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy application code
+COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
 COPY . .
 
-# Ensure .env.services is present (copied by workflow)
-# This file contains DB connection details baked at build time
-
-EXPOSE 5000
-
-# Use Gunicorn for production WSGI server
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "--worker-class", "sync", "--timeout", "60", "app:app"]
+EXPOSE 8000
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

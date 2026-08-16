@@ -1,15 +1,27 @@
-version: "3.8"
 services:
-  eea_db:
-    image: postgres:15
-    env_file:
-      - .env.services
+  postgres:
+    image: postgres:16-alpine
+    container_name: eagle_eye_postgres
     restart: unless-stopped
-    volumes:
-      - eea_data:/var/lib/postgresql/data
-      - ./init:/docker-entrypoint-initdb.d:ro
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_DB: ${POSTGRES_DB:-eagle_eye_db}
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - eagle_eye_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-admin}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
-  eea_data:
+  postgres_data:
+
+networks:
+  eagle_eye_network:
+    external: true
