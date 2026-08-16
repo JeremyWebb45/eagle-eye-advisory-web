@@ -52,6 +52,7 @@ jobs:
               -v $(pwd):/app \
               python:3.11-slim \
               bash -c "
+                apt-get update -qq && apt-get install -y -qq libpq5 &&
                 pip install -q alembic sqlalchemy python-dotenv psycopg &&
                 alembic upgrade head
               "

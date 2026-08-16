@@ -4,8 +4,15 @@ on:
   push:
     branches:
       - pipeline-refactor
-    paths:
-      - "api/**"
+    paths-ignore:
+      - "api/migrations/versions/**"
+      - ".github/workflows/**"
+      - "ui/**"
+      - "nginx/**"
+      - "db/**"
+      - ".gitignore"
+      - "DROPLET_SETUP.md"
+      - ".env.services.template"
   workflow_dispatch:
 
 jobs:
