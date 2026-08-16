@@ -21,3 +21,7 @@ services:
 
 volumes:
   postgres_data:
+
+networks:
+  eagle_eye_network:
+    external: true

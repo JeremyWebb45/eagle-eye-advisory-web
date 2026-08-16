@@ -19,3 +19,7 @@ services:
       - ./protected_files:/app/protected_files
     networks:
       - eagle_eye_network
+
+networks:
+  eagle_eye_network:
+    external: true
