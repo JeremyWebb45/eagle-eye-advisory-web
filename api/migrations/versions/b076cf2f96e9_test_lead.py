@@ -28,7 +28,7 @@ def upgrade() -> None:
         """,
         (
             str(uuid4()),
-            "Test Lead",
+            "Test Lead 2",
             "test@example.com",
             "Senior Manager",
             "+1-555-0123",

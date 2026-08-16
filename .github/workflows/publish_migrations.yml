@@ -20,17 +20,20 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Install uv
+        run: pip install uv
+
       - name: Install dependencies
         working-directory: ./api
         run: |
-          pip install -q -e .
+          uv sync
 
       - name: Run migrations
         working-directory: ./api
         env:
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          POSTGRES_HOST: https://eagleeyeadvisory.us.com
+          POSTGRES_HOST: eagleeyeadvisory.us.com
           POSTGRES_PORT: 5433
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
           JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
